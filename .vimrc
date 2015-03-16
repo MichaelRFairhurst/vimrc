@@ -19,6 +19,7 @@ ino <C-C> <Esc>
 set tabstop=4
 set shiftwidth=4
 set smarttab
+filetype on
 
 " let <Leader> be a space
 let mapleader=" "
