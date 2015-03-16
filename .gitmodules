@@ -1,0 +1,12 @@
+[submodule "bundle/vim-abolish"]
+	path = bundle/vim-abolish
+	url = git://github.com/tpope/vim-abolish.git
+[submodule "bundle/angular-dep"]
+	path = bundle/angular-dep
+	url = git@github.com:MichaelRFairhurst/angular-dep.vim.git
+[submodule "bundle/vim-easymotion"]
+	path = bundle/vim-easymotion
+	url = git@github.com:Lokaltog/vim-easymotion.git
+[submodule "bundle/wake.vim"]
+	path = bundle/wake.vim
+	url = git@github.com:MichaelRFairhurst/wake.vim.git
