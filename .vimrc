@@ -8,6 +8,13 @@ inoremap <Right> <NOP>
 inoremap <Up> <NOP>
 inoremap <Down> <NOP>
 
+" use Space instead of : to make :wq etc faster / easier
+noremap <SPACE> :
+
+" Disable newlines in insert mode ;)
+inoremap <CR> <ESC>
+inoremap <ESC> <CR>
+
 noremap ci< T>ct<
 noremap ci> T>ct<
 
@@ -15,6 +22,9 @@ cnoremap <C-a> <Home>
 
 " Set <C-C> to <ESC> so <C-C> during rectangular select preserves changes
 ino <C-C> <Esc>
+
+" enter add lines below selection
+nnoremap <CR> o<Esc>
 
 set tabstop=4
 set shiftwidth=4
@@ -34,14 +44,27 @@ augroup myvimrc
     au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
 augroup END
 
-" Pathogen allows easy plugin install/remove
-execute pathogen#infect()
+call plug#begin()
 
-" enter add lines below selection
-nnoremap <CR> o<Esc>
+Plug 'natebosch/vim-lsc'
+Plug 'lifepillar/vim-mucomplete'
+
+Plug 'tpope/vim-abolish'
+Plug 'easymotion/vim-easymotion'
+Plug 'danro/rename.vim'
+Plug 'rstacruz/sparkup', {'rtp:': 'vim/'}
+
+Plug 'garbas/vim-snipmate' | Plug 'MarcWeber/vim-addon-mw-utils' | Plug 'tomtom/tlib_vim'
+Plug 'honza/vim-snippets'
+Plug 'natebosch/dartlang-snippets'
+
+call plug#end()
+
+let g:lsc_server_commands = {'dart': 'dart language-server --lsp'}
 
 " change easymotion prefix from two spaces to one
-map <Leader> <Plug>(easymotion-prefix)
+
+" map <Leader> <Plug>(easymotion-prefix)
 
 " Keeping this around so I can make my own plugins later
 function! ToggleComment()
@@ -125,3 +148,18 @@ let g:ftplugin_sql_omni_key = '<C-H>'
 
 " Don't enter command mode
 map Q <NOP>
+
+let g:lsc_enable_autocomplete = v:false
+
+let g:lsc_auto_map = {
+    \ 'defaults': v:true,
+    \}
+
+let g:snipMate = { 'snippet_version' : 1 }
+set omnifunc=lsc#complete#complete
+
+" close completion pane one done completion
+autocmd CompleteDone * pclose
+
+set completeopt+=longest,menuone,noselect
+let g:mucomplete#empty_text=1
